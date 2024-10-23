@@ -142,11 +142,70 @@ def eliminarRepetidos (p:list[str]) -> list[str]:
   pass
 
 #3.a
-def pertenece_a_cada_uno_version_1 (l:list[list[int]], e: int) -> bool:
-  for i in l:
-    if e in i:
-      return True
+def pertenece_a_cada_uno_version_1 (l:list[list[int]], e: int) -> list[bool]:
+  res: list[bool] = []
 
-  return False
+  for fila in l:
+    if e in fila:
+      res.append(True)
+    else:
+      res.append(False)
 
-print(pertenece_a_cada_uno_version_1([[1,2,3,4],[2,3],[5]], 5))
+  return res
+
+print("pertenece_a_cada_uno_version_1([[1,2,3,4],[2,3],[5]], 5)", pertenece_a_cada_uno_version_1([[1,2,3,4],[2,3],[5]], 5))
+
+#3.b
+def esMatriz (m: list[list[int]]) -> bool:
+  if len(m) > 0:
+    longFila: int = len(m[0])
+    for fila in m:
+      if not (len(fila) > 0 and len(fila) == longFila):
+        return False
+
+    return True
+
+  else: return False
+
+print("esMatriz([[1,2,3,4], [1,2,3], [1,2]])", esMatriz([[1,2,3,4], [1,2,3], [1,2]]))
+print("esMatriz([[1,4], [1,3], [1,2]])", esMatriz([[1,4], [1,3], [1,2]]))
+print("esMatriz([])", esMatriz([]))
+
+#3.c
+def filasOrdenadas (m: list[list[int]]) -> list[bool]:
+  res: list[bool] = []
+
+  for fila in m:
+   res.append(ordenados(fila))
+
+  return res
+
+print("filasOrdenadas([[1,2,3], [4,5,6], [7,8,9]])", filasOrdenadas([[1,2,3], [4,5,6], [7,8,9]]))
+print("filasOrdenadas([[1,2,3], [4,5,6], [7,8,9]])", filasOrdenadas([[1,2,3], [4,5,6], [7,9,8]]))
+
+#3.d
+def columna (m: list[list[int]], c: int) -> list[int]:
+  res: list[int] = []
+
+  for fila in m:
+    res.append(fila[c])
+
+  return res
+
+print("columna([[1,2,3], [4,5,6], [7,8,9]], 2)", columna([[1,2,3], [4,5,6], [7,8,9]], 0))
+
+#3.e
+def columnasOrdenadas (m: list[list[int]]) -> list[bool]:
+  res: list[bool] = []
+
+  for i in range(len(m)):
+    res.append(ordenados(columna(m, i)))
+
+  return res
+
+print("columnasOrdenadas([[1,2,3], [4,5,6], [7,8,9]]) -->", columnasOrdenadas([[1,2,3], [4,5,6], [7,8,9]]))
+print("columnasOrdenadas([[1,2,3], [4,5,6], [7,8,9]]) -->", columnasOrdenadas([[1,5,3], [4,2,9], [7,8,3]]))
+
+#3.f
+def trasponer (m: list[list[int]]) -> list[list[int]]:
+  pass
